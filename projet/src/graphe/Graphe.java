@@ -1,6 +1,10 @@
-package TP6;
+package graphe;
 
 import javax.swing.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Graphe<E> {
@@ -48,6 +52,19 @@ public class Graphe<E> {
             return this.listeAdjacence.get(sommet).keySet();
         } else {
             return null;
+        }
+    }
+
+    public void exportGraph() {
+        try {
+            File fichier = new File("Fichiers/test.txt"); //Objet manipulant un fichier
+            String text = "";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fichier));
+            text += this.listeAdjacence.size();
+            writer.write("text");
+            writer.close(); //Il faut absolument fermer le writer après utilisation
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,4 +1,4 @@
-package TP6;
+package graphe;
 
 import java.io.BufferedWriter;
 import java.io.File;
