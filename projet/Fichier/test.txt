@@ -1,0 +1,10 @@
+0=Bordeau;1=Nevers;2=Marseille;3=Lyon;4=Lille;5=Dijon;6=Paris;7=Orlean;
+8
+0 12 5 8 x x x 10 
+12 0 x x x 5 3 4 
+5 x 0 6 x x x x 
+8 x 6 0 x 6 x x 
+x x x x 0 x 5 x 
+x 5 x 6 x 0 6 x 
+x 3 x x 5 6 0 3 
+10 4 x x x x 3 0 
