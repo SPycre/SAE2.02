@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class base {
 
@@ -11,7 +12,8 @@ public class base {
 
         Graphe Villes = new Graphe();
         Villes.importGraph();
-        System.out.println(Villes);
+       List<Integer> chemin = greedyBestInsertion.calculTSP(Villes);
+       System.out.println(chemin);
 
     }
 

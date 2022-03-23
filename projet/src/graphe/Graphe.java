@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Graphe {
     private final boolean orientation;
-    private final Map<Integer,Map<Integer,Integer>> listeAdjacence;
+    private final Map<Integer,Map<Integer,Integer>> listeAdjacence; // Map<SommetOrigine,Map<SommetVoisin,poid>>
 
     public Graphe(boolean orientation){
         this.orientation = orientation;
@@ -79,15 +79,15 @@ public class Graphe {
     }
 
     public void importGraph() {
-        Map<Integer,String> identifiant= new HashMap<>();
 
+        Map<Integer,String> identifiant= new HashMap<>();
         try {
             File fichier = new File("Fichier/test.txt");
             BufferedReader reader = new BufferedReader(new FileReader(fichier));
             int nombreSommet = Integer.parseInt(reader.readLine());
-            for (int idCourant = 0;idCourant<8;idCourant++) {
+            for (int idCourant = 0;idCourant<nombreSommet;idCourant++) {
                 String ligne = reader.readLine();
-                String[] voisins =  ligne.split(" ");
+                String[] voisins = ligne.split(" ");
                 for (int idVoisin = 0;idVoisin<nombreSommet;idVoisin++) {
                     if (!voisins[idVoisin].equals("x")) {
                         this.ajoutArete(idCourant, idVoisin, Integer.parseInt(voisins[idVoisin]));
