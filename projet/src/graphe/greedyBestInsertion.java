@@ -25,13 +25,13 @@ public class greedyBestInsertion {
         int insertLePlusProche = -1;
         int poidLePlusProche = -1;
         for (int idVoisin : sommetsVisites.keySet()) {
-                int poid = graph.getPoids(id1,idVoisin)+graph.getPoids(id2,idVoisin)-graph.getPoids(id1,id2);
-                if (insertLePlusProche == -1 ||
-                        (poid < poidLePlusProche)
-                ) {
-                    insertLePlusProche = idVoisin;
-                    poidLePlusProche = poid;
-                }
+            int poid = graph.getPoids(id1,idVoisin)+graph.getPoids(id2,idVoisin)-graph.getPoids(id1,id2);
+            if (insertLePlusProche == -1 ||
+                    (poid < poidLePlusProche)
+            ) {
+                insertLePlusProche = idVoisin;
+                poidLePlusProche = poid;
+            }
         }
         return insertLePlusProche;
     }
@@ -83,7 +83,6 @@ public class greedyBestInsertion {
             poidTotal+=poidLePlusProche;
         }
 
-        poidTotal = 0;
         System.out.println(poidTotal);
         return cheminTSP;
     }

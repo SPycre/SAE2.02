@@ -51,11 +51,11 @@ public class Graphe {
         }
     }
 
-    public void exportGraph() {
+    public void exportGraph(String Path) {
         int id = 0;
 
         try {
-            File fichier = new File("Fichier/test.txt");
+            File fichier = new File(Path);
             String text = "";
 
             text += this.listeAdjacence.size() + "\n";
@@ -78,11 +78,11 @@ public class Graphe {
         }
     }
 
-    public void importGraphfromAdjacence() {
+    public void importGraphfromAdjacence(String Path) {
 
         Map<Integer,String> identifiant= new HashMap<>();
         try {
-            File fichier = new File("Fichier/test.txt");
+            File fichier = new File(Path);
             BufferedReader reader = new BufferedReader(new FileReader(fichier));
             int nombreSommet = Integer.parseInt(reader.readLine());
             for (int idCourant = 0;idCourant<nombreSommet;idCourant++) {
