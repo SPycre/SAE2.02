@@ -78,7 +78,7 @@ public class Graphe {
         }
     }
 
-    public void importGraph() {
+    public void importGraphfromAdjacence() {
 
         Map<Integer,String> identifiant= new HashMap<>();
         try {
@@ -97,6 +97,7 @@ public class Graphe {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
