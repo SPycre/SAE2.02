@@ -69,12 +69,45 @@ public class Graphe {
                         text += "x ";
                     }
                 }
+                text+="\n";
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter(fichier));
             writer.write(text);
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void importGraphfromVertex(String Path) {
+        List<List<Integer>> vertexList = new ArrayList<>();
+        try {
+            File fichier = new File(Path);
+            BufferedReader reader = new BufferedReader(new FileReader(fichier));
+            int nombreSommet = Integer.parseInt(reader.readLine());
+            for (int idCourant = 0;idCourant<nombreSommet;idCourant++) {
+                String ligne = reader.readLine();
+                String[] coords = ligne.split(" ");
+                vertexList.add(new ArrayList<>());
+                vertexList.get(idCourant).add(idCourant);
+                vertexList.get(idCourant).add(Integer.parseInt(coords[0]));
+                vertexList.get(idCourant).add(Integer.parseInt(coords[1]));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (List<Integer> vertex:vertexList) {
+            for (List<Integer> vertex2:vertexList) {
+                if (vertex != vertex2) {
+                    int x1 = vertex.get(1);
+                    int y1 = vertex.get(2);
+                    int x2 = vertex2.get(1);
+                    int y2 = vertex2.get(2);
+                    double distance =  Math.sqrt( Math.pow(x1-x2,2) + Math.pow(y1-y2,2));
+                    this.ajoutArete(vertex.get(0),vertex2.get(0),(int)distance);
+                }
+            }
         }
     }
 
