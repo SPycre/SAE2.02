@@ -39,7 +39,7 @@ public class Graphe {
         }
     }
 
-    public Set<Integer> getSommets() {
+    public  Set<Integer> getSommets() {
         return this.listeAdjacence.keySet();
     }
 
@@ -55,7 +55,7 @@ public class Graphe {
         int id = 0;
 
         try {
-            File fichier = new File("Fichier/test.txt");
+            File fichier = new File("projet/Fichier/test.txt");
             String text = "";
 
             text += this.listeAdjacence.size() + "\n";
