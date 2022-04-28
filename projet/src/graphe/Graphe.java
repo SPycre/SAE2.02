@@ -163,7 +163,7 @@ public class Graphe {
     }
 
     public int nearestNeighbour(int sommetDepart) { //Algorithme que j'ai réalisé afin de pouvoir tester mon nearest neighbour dessus
-        System.out.println(" ------Nearest Neighbour--------");
+        System.out.println(" ------Nearest Neighbour---------");
         boolean visited[] = new boolean[this.listeAdjacence.size()];
         int cheminSolution[] = new int[this.listeAdjacence.size()];
         int coutSolution = 0;
@@ -207,7 +207,7 @@ public class Graphe {
         System.out.println("Résultat du 2-opt : " + opt2(cheminSolution));
         System.out.print("Résultat du nearest neighbour : " + coutSolution);
         System.out.println("");
-        System.out.println(" -------------------------------");
+        System.out.println(" --------------------------------");
         return coutSolution; // On retourne la longueur du chemin de la solution
     }
 
