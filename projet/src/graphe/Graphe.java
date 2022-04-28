@@ -162,7 +162,7 @@ public class Graphe {
         return sontVisites == monTableau.length;
     }
 
-    public int nearestNeighbour(int sommetDepart) { //Algorithme que j'ai réalisé afin de pouvoir tester mon nearest neighbour dessus
+    public int nearestNeighbour(int sommetDepart) { //Algorithme que j'ai réalisé afin de pouvoir tester mon 2opt dessus
         System.out.println(" ------Nearest Neighbour---------");
         boolean visited[] = new boolean[this.listeAdjacence.size()];
         int cheminSolution[] = new int[this.listeAdjacence.size()];
