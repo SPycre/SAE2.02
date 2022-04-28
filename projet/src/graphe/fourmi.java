@@ -3,7 +3,7 @@ package graphe;
 public class fourmi {
 
     //la taille du tour représente la taille de tout les arrets du graphes
-    public double tailleDuTour;
+    public int tailleDuTour;
     // le tableau tour stocke tout les sommets parcourus par la fourmi
     public int[] tour;
     // le tableau visited indique quelle sommets a été visiter ou pas
@@ -18,9 +18,8 @@ public class fourmi {
     }
     // retourne la taille du graphe
     public int taille_graphe() {
-        int taille = 0;
-        taille=environements.graphes[0].getSommets().size();
-        return taille;
+        tailleDuTour=environements.graphes[0].getSommets().size();
+        return tailleDuTour;
     }
    // Retourner le sommet pour une étape spécifique du tour
     public int gettour(int etape){
@@ -47,12 +46,12 @@ public class fourmi {
         int SommetProchain=taille_graphe();
         int SommetActuel=tour[etape-1];
         // commencer avec une valeur qu'une arrete ateindra jamais
-        double DistanceMinimum=10000.0;
+        double Distance=10000.0;
         // Pour chaque sommet non visité, si le coût est inférieur à la distance minimale, sélectionnez-le.
         for (int SommetDestination=0;SommetDestination<taille_graphe();SommetDestination++){
-            if (visited[SommetDestination]==false&& environements.graphes[0].getPoids(SommetActuel,SommetDestination)<DistanceMinimum){
+            if (visited[SommetDestination]==false&& environements.graphes[0].getPoids(SommetActuel,SommetDestination)<Distance){
                 SommetProchain=SommetDestination;
-                DistanceMinimum=environements.graphes[0].getPoids(SommetActuel,SommetDestination);
+                Distance=environements.graphes[0].getPoids(SommetActuel,SommetDestination);
             }
         }
         // aller au prochain sommet
@@ -61,16 +60,14 @@ public class fourmi {
     }
     //permet de compter le tour parcourus par la fourmis
     public double compterLeTour(){
-        double tailletour=0.0;
         for(int i=0;i<taille_graphe();i++){
-            tailletour = tailletour +environements.graphes[0].getPoids(tour[i], tour[i + 1]);
+            tailleDuTour = tailleDuTour +environements.graphes[0].getPoids(tour[i], tour[i + 1]);
         }
-        return tailletour ;
+        return tailleDuTour ;
     }
 // permet de finir le tour avec le sommet du début
     public void FinDuTour(){
         tour[taille_graphe()]=tour[0];
-       // tailleDuTour=compterLeTour();
     }
 
     // calcul le poids du chemin parcourut par la fourmi en commençant par un sommet aléatoire ensuite la fourmi choisi le voisin le plus proche
@@ -91,10 +88,9 @@ public class fourmi {
         int sommet;
         int sommetprochain=taille_graphe();
         int sommetActuel=this.tour[etape-1];
-        double meilleurvaleur=-1.0;
         //selection le voisin non visiter avec le meilleur cout
         for (int i=0;i<taille_graphe()-1;i++){
-           sommet=environements.getChoixinfo(sommetActuel,i);
+           sommet=environements.getinfoChoisit(sommetActuel,i);
             if(visited[sommet]==false){
                 environements.graphes[0].getPoids(sommetActuel,sommet);
                 sommetprochain=sommet;
@@ -110,35 +106,35 @@ public class fourmi {
 
     public void AllerAuVoisinChoisit(int etape) {
         int SommetActuel = this.tour[etape - 1];
-        Double SommeProbabilite = 0.0;
-        double[] selectionnerProbabilite = new double[taille_graphe()];
+        Double Somme = 0.0;
+        double[] Probabilite = new double[taille_graphe()];
         // Pour chaque sommet voisin le plus proche qui n'a pas encore été visité l'ajouter dans le tableau
         for (int i = 0; i < taille_graphe() - 1; i++) {
-            if (visited[environements.getChoixinfo(SommetActuel, i)] == true) {
-                selectionnerProbabilite[i] = 0.0;
+            if (visited[environements.getinfoChoisit(SommetActuel, i)] == true) {
+                Probabilite[i] = 0.0;
             } else {
-                selectionnerProbabilite[i] = environements.graphes[0].getPoids(SommetActuel, environements.getChoixinfo(SommetActuel, i));
-                SommeProbabilite = SommeProbabilite + selectionnerProbabilite[i];
+                Probabilite[i] = environements.graphes[0].getPoids(SommetActuel, environements.getinfoChoisit(SommetActuel, i));
+                Somme = Somme + Probabilite[i];
             }
         }
         // Si tous les voisins les plus proches ont été visités, sélectionnez le voisin le plus proche des  voisins restants.
-        if (SommeProbabilite <= 0) {
+        if (Somme <= 0) {
             AllerAuSommetPlusProche(etape);
         } else {
-            double random = Math.random() * SommeProbabilite;
+            double random = Math.random() * Somme;
             int i = 0;
-            double proba = selectionnerProbabilite[i];
+            double proba = Probabilite[i];
             // Sélectionne le voisin correspondant à la probabilité proportionnelle aléatoire.
             while (proba <= random) {
                 i++;
-                proba = proba + selectionnerProbabilite[i];
+                proba = proba + Probabilite[i];
             }
             if (i == taille_graphe() - 1) {
                 AllerAuMeilleurVoisin(etape);
             }
 
             //visiter le voisin selectionner
-            tour[etape] = environements.getChoixinfo(SommetActuel, i);
+            tour[etape] = environements.getinfoChoisit(SommetActuel, i);
             visited[this.tour[etape]] = true;
         }
     }

@@ -7,10 +7,11 @@ public class Lancement {
     }
 
     public void lancement() {
+        environement.EntrerLesValeurs();
         environement.VoisinPlusProche();
         environement.PopulationFourmi();
         environement.LePheromoneInitial();
-        for(int i=0;i<812;i++){
+        for(int i=0;i<800;i++){
             environement.LaSolutionConstruitParLaFourmi();
             environement.MiseAJourDuPheromone();
             environement.affichage(i);

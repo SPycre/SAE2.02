@@ -6,35 +6,40 @@ public class Environement {
     public Double[][] pheromone;
     public Double[][] LeChoixDuChemin;
     public int nbrFourmi=20;
-    private int [][] choixinfo=new int[][]{};
-    //public double alpha = 1.0;
-    //public double beta = 5.0;
-    double alpha;
-    double beta;
+    private int [][] infoChoisit=new int[][]{};
     double meilleursommet = 10000000.0;
     int[] meilleurtour=new int[]{};
-
-
-
+    int alpha;
+    int beta;
     public  fourmi[]fourmis;
     Graphe Graphes;
     Graphe[] graphes = new Graphe[]{Graphes};
-
-
 
     public Environement(Graphe Graphes) {
         this.graphes = graphes;
         graphes[0]=Graphes;
 
     }
+    public void EntrerLesValeurs(){
+        System.out.println(" --------------------------------------------------------------  ");
+        Scanner scan = new Scanner(System.in);
+        System.out.println(" Veuillez Entrer une valeur d'alpha supérieur à 0");
+            alpha=scan.nextInt();
+        System.out.println(" Veuillez Entrer une valeur de beta supérieur à 0");
+            beta=scan.nextInt();
+        scan.close();
+    }
+    //return une fourmi
     public fourmi[] getFourmis() {
         return fourmis;
     }
+
     public int taille_graphe() {
         int taille = 0;
         taille=graphes[0].getSommets().size();
         return taille;
     }
+
     //cette methode permet de crée k fourmis qui vont chercher une solution dans l'environement
     public void PopulationFourmi(){
         this.fourmis=new fourmi[nbrFourmi];
@@ -45,22 +50,21 @@ public class Environement {
     }
     //Stocke dans le tableau les voisin les plus proche
     public void VoisinPlusProche() {
-        this.choixinfo = new int[taille_graphe()][taille_graphe()-1];
-        Integer[] sommet = new Integer[taille_graphe()];
-
+        this.infoChoisit = new int[taille_graphe()][taille_graphe()-1];
+        int[] sommet = new int[taille_graphe()];
         for(int i = 0; i < taille_graphe(); i++) {
             for(int j = 0; j < taille_graphe(); j++) {
                 sommet[j] = j;
             }
             for(int r = 0; r < taille_graphe()-1; r++) {
-                choixinfo[i][r] = sommet[r];
+                infoChoisit[i][r] = sommet[r];
             }
         }
     }
    // Retourne le plus proche voisin de la position de l'indice de rang
 
-    public int getChoixinfo(int sommet , int index) {
-        return choixinfo[sommet][index];
+    public int getinfoChoisit(int sommet , int index) {
+        return infoChoisit[sommet][index];
     }
 
 
@@ -72,8 +76,8 @@ public class Environement {
 
         for (int i = 0; i < taille_graphe(); i++) {
             for (int j = 0; j < taille_graphe()-1; j++) {
-               double heuristique=(1.0 / (graphes[0].getPoids(i, j)));
-                LeChoixDuChemin[i][j] = (Double) (Math.pow(pheromone[i][j], (alpha)) * Math.pow(heuristique, beta));
+               double x=(1.0 / (graphes[0].getPoids(i, j)));
+                LeChoixDuChemin[i][j] = (Math.pow(pheromone[i][j], (alpha)) * Math.pow(x, beta));
                 LeChoixDuChemin[j][i] = LeChoixDuChemin[i][j];
             }
         }
@@ -89,8 +93,6 @@ public class Environement {
             {
                 pheromone[i][j]=QuantiteInitialPheromone;
                 pheromone[j][i]=QuantiteInitialPheromone;
-                LeChoixDuChemin[i][j]=QuantiteInitialPheromone;
-                LeChoixDuChemin[j][i]=QuantiteInitialPheromone;
             }
         }
         this.CalculerlaProbabilite();
@@ -150,30 +152,32 @@ public class Environement {
 
 
 
-
+//permet d'afficher le plus court chemin et le poids du tour
     public void affichage(int etape) {
-
         double x = -1.0;
         double tour = 0.0;
         fourmi MeilleurFourmi = null;
         for (fourmi Fourmiss : getFourmis()) {
             MeilleurFourmi = Fourmiss;
-            tour = tour + Fourmiss.taille_graphe();
-            if (x < meilleursommet) {
-            meilleursommet = x;
-            meilleurtour = MeilleurFourmi.getTour();
-            String affichage = " le plus cours chemin est : [" + meilleurtour[0];
-            for (int i = 1; i < meilleurtour.length; i++) {
-                affichage = affichage + "-" + meilleurtour[i];
-            }
-            affichage = affichage + "]";
-            System.out.println(affichage);
-            System.out.println(tour);
-
-            }
-
-
+            tour = tour +Fourmiss.taille_graphe();
         }
+           if (x < meilleursommet) {
+                meilleursommet = x;
+                meilleurtour = MeilleurFourmi.getTour();
+                String affichage = " le plus cours chemin est : [" + meilleurtour[0];
+                for (int i = 1; i < meilleurtour.length; i++) {
+                    affichage = affichage + "-" + meilleurtour[i];
+                }
+                affichage = affichage + "]";
+                System.out.println(affichage + "\n");
+                System.out.println(" Le poids du tour parcourus par les fourmis est :" + tour);
+                System.out.println(" -------------------------------------------------------------- ");
+            }
+
+
+
+
+
     }
 
 }
