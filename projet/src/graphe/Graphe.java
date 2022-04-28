@@ -252,9 +252,11 @@ public class Graphe {
                 }
             }
         }
-        /*for(int i : sommetsSolution){ //On affiche la nouvelle solution
-            System.out.println(sommetsSolution[i]);
-        }*/
+        System.out.print("Solution 2opt : [");
+        for(int i : sommetsSolution){ //On affiche la nouvelle solution
+            System.out.print(" " + sommetsSolution[i]);
+        }
+        System.out.println(" ]");
         return parcours(sommetsSolution); // On retourne la longueur du nouveau chemin, voir ligne 136
     }
     
