@@ -12,6 +12,7 @@ public class base {
         Graphe Villes = new Graphe();
         Villes.importGraph();
         System.out.println(Villes);
+        System.out.println(Villes.nearestNeighbour(1));
 
     }
 
