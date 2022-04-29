@@ -43,18 +43,18 @@ public class Opt2 {
             amelioration = false;
             for(int indi1 = 0; indi1 < sommetsSolution.length; indi1++) { // On parcourt la solution
                 for (int indi2 = 2; indi2 < sommetsSolution.length - 1; indi2++) {
-                    if(comparerSolutions(indi1,indi2,sommetsSolution)){ //Si on constate une amélioration, on échange les arêtes, voir ligne 146
+                    if(comparerSolutions(indi1,indi2,sommetsSolution)){ //Si on constate une amélioration, on échange les arêtes
                         amelioration = true;
-                        echangerAretes(indi1,indi2,sommetsSolution); //voir ligne 125
+                        echangerAretes(indi1,indi2,sommetsSolution);
                     }
                 }
             }
         }
         System.out.print("Solution 2opt : [");
-        for(int i : sommetsSolution){ //On affiche la nouvelle solution
+        for(int i = 0; i <  sommetsSolution.length; i++){ //On affiche la nouvelle solution
             System.out.print(" " + sommetsSolution[i]);
         }
         System.out.println(" ]");
-        return parcours(sommetsSolution); // On retourne la longueur du nouveau chemin, voir ligne 136
+        return parcours(sommetsSolution); // On retourne la longueur du nouveau chemin
     }
 }
