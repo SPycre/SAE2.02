@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class base {
 
@@ -12,7 +14,7 @@ public class base {
         Graphe Villes = new Graphe();
         Villes.importGraph();
         System.out.println(Villes);
-        Villes.nearestNeighbour(1);
+        NearestNeighbor.nearestNeighbour(5, (HashMap<Integer, Map<Integer, Integer>>) Villes.getListeAdjacence());
 
     }
 
