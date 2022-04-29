@@ -8,19 +8,6 @@ La solution est déterminée par les deux premier sommets, les deux même sommet
 */
 public class greedyNearestInsertion {
 
-    private static int closestVertex(Graphe graph,Map<Integer,Boolean> sommetsVisites,int sommetdepart) {
-        int sommetleplusProche = -1;
-        int poidleplusproche = -1;
-        for (int idVoisin : sommetsVisites.keySet()) {
-            int poid = graph.getPoids(sommetdepart, idVoisin);
-            if (sommetleplusProche == -1 || poid < poidleplusproche) {
-                sommetleplusProche = idVoisin;
-                poidleplusproche = poid;
-            }
-        }
-        return sommetleplusProche;
-    }
-
     private static int closestInsert(int id1,int id2,Graphe graph,Map<Integer,Boolean> sommetsVisites) {
         int insertLePlusProche = -1;
         int vertexLePlusProche = -1;
