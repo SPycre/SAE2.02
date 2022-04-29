@@ -3,8 +3,8 @@ package graphe;
 import java.util.*;
 
 /*
-Programme TSP utilisant la méthode greedy Best Insertion. Le sommet de départ est choisi random, le second sommet est le sommet le plus proche.
-Le sommet de départ détermine la longueur du chemin final, deux même sommet donneront toujours la même longueur finale.
+Programme TSP utilisant la méthode greedy Nearest Insertion. Les deux sommets de départ sont random.
+La solution est déterminée par les deux premier sommets, les deux même sommets de départ donneront toujours la même solution.
 */
 public class greedyNearestInsertion {
 
@@ -44,11 +44,11 @@ public class greedyNearestInsertion {
             sommetsVisites.put(sommet,true);
         }
 
-        int depart = (int)(Math.random()*sommetsVisites.size()-1);
-
-        cheminTSP.add(depart); // Initialisation des deux premiers sommets
+        int depart = (int)(Math.random()*sommetsVisites.size()-1);// Initialisation des deux premiers sommets
+        cheminTSP.add(depart);
         sommetsVisites.remove(depart);
-        int sommetLePlusProche = greedyNearestInsertion.closestVertex(graph, sommetsVisites,depart);
+
+        int sommetLePlusProche = (int)(Math.random()*sommetsVisites.size()-1);
         cheminTSP.add(sommetLePlusProche);
         sommetsVisites.remove(sommetLePlusProche);
 

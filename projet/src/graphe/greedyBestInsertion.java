@@ -3,23 +3,10 @@ package graphe;
 import java.util.*;
 
 /*
-Programme TSP utilisant la méthode greedy Best Insertion. Le sommet de départ est choisi random, le second sommet est le sommet le plus proche.
-Le sommet de départ détermine la longueur du chemin final, deux même sommet donneront toujours la même longueur finale.
+Programme TSP utilisant la méthode greedy Best Insertion. Les deux sommets de départ sont random.
+La solution est déterminée par les deux premier sommets, les deux même sommets de départ donneront toujours la même solution.
 */
 public class greedyBestInsertion {
-
-    private static int closestVertex(Graphe graph,Map<Integer,Boolean> sommetsVisites,int sommetdepart) {
-        int sommetleplusProche = -1;
-        int poidleplusproche = -1;
-        for (int idVoisin : sommetsVisites.keySet()) {
-            int poid = graph.getPoids(sommetdepart, idVoisin);
-            if (sommetleplusProche == -1 || poid < poidleplusproche) {
-                sommetleplusProche = idVoisin;
-                poidleplusproche = poid;
-            }
-        }
-        return sommetleplusProche;
-    }
 
     private static int cheapestInsert(int id1,int id2,Graphe graph,Map<Integer,Boolean> sommetsVisites) {
         int insertLePlusProche = -1;
@@ -47,11 +34,11 @@ public class greedyBestInsertion {
             sommetsVisites.put(sommet,true);
         }
 
-        int depart = (int)(Math.random()*sommetsVisites.size()-1);
-
-        cheminTSP.add(depart); // Initialisation des deux premiers sommets
+        int depart = (int)(Math.random()*sommetsVisites.size()-1); // Initialisation des deux premiers sommets
+        cheminTSP.add(depart);
         sommetsVisites.remove(depart);
-        int sommetLePlusProche = greedyBestInsertion.closestVertex(graph, sommetsVisites,depart);
+
+        int sommetLePlusProche = (int)(Math.random()*sommetsVisites.size()-1);
         cheminTSP.add(sommetLePlusProche);
         sommetsVisites.remove(sommetLePlusProche);
         poidTotal += graph.getPoids(depart,sommetLePlusProche);
