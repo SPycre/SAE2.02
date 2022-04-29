@@ -14,7 +14,7 @@ public class base {
         Graphe Villes = new Graphe();
         Villes.importGraph();
         System.out.println(Villes);
-        NearestNeighbor.nearestNeighbour(5, (HashMap<Integer, Map<Integer, Integer>>) Villes.getListeAdjacence());
+        NearestNeighbor.nearestNeighbour(2, (HashMap<Integer, Map<Integer, Integer>>) Villes.getListeAdjacence());
 
     }
 
