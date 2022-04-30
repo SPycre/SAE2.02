@@ -153,7 +153,7 @@ public class Environement {
 
 
 //permet d'afficher le plus court chemin et le poids du tour
-    public void affichage(int etape) {
+    public void affichage() {
         double x = -1.0;
         double tour = 0.0;
         fourmi MeilleurFourmi = null;
