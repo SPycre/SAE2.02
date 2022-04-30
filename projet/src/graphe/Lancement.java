@@ -14,7 +14,7 @@ public class Lancement {
         for(int i=0;i<800;i++){
             environement.LaSolutionConstruitParLaFourmi();
             environement.MiseAJourDuPheromone();
-            environement.affichage(i);
+            environement.affichage();
 
         }
 
